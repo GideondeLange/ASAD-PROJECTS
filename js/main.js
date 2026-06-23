@@ -1,0 +1,170 @@
+/* Asad Projects — Shared JS */
+
+(function () {
+  'use strict';
+
+  /* --- Navbar scroll state --- */
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* --- Mobile hamburger --- */
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  /* --- Mobile services sub-menu toggle --- */
+  const mobileServicesToggle = document.getElementById('mobile-services-toggle');
+  const mobileSub = document.getElementById('mobile-sub');
+  if (mobileServicesToggle && mobileSub) {
+    mobileServicesToggle.addEventListener('click', () => {
+      mobileSub.classList.toggle('open');
+    });
+  }
+
+  /* --- Hero bg loaded animation --- */
+  const heroBg = document.getElementById('hero-bg');
+  if (heroBg) {
+    const bgUrl = heroBg.style.backgroundImage.replace(/url\(['"]?|['"]?\)/g, '');
+    if (bgUrl) {
+      const img = new Image();
+      img.onload = () => heroBg.classList.add('loaded');
+      img.src = bgUrl;
+    }
+  }
+
+  /* ----------------------------------------------------------------
+     LIGHTBOX
+     Works on:
+       • Gallery page  → .masonry-item (div wrapping an img)
+       • Services page → .service-img-grid img (direct img elements)
+     Mobile back-button: pushState on open, popstate closes lightbox
+     so pressing Back returns the user to their exact scroll position.
+  ---------------------------------------------------------------- */
+  (function () {
+    // Collect all triggers and their full-res src
+    const masonryItems  = [...document.querySelectorAll('.masonry-item')];
+    const serviceImages = [...document.querySelectorAll('.service-img-grid img')];
+
+    if (!masonryItems.length && !serviceImages.length) return;
+
+    // Build unified list: { clickTarget, src }
+    const entries = [
+      ...masonryItems.map(el => ({ clickTarget: el, src: el.querySelector('img').src })),
+      ...serviceImages.map(img => ({ clickTarget: img, src: img.src }))
+    ];
+
+    let current = 0;
+    let isOpen  = false;
+
+    // Create lightbox DOM if not already in the HTML (gallery.html has it; services doesn't)
+    let lb = document.getElementById('lightbox');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'lightbox';
+      lb.innerHTML =
+        '<div class="lb-inner"><img id="lb-img" src="" alt="Project image"></div>' +
+        '<button id="lb-prev" class="lb-btn">&#8249;</button>' +
+        '<button id="lb-next" class="lb-btn">&#8250;</button>' +
+        '<button id="lb-close" class="lb-btn">&times;</button>';
+      document.body.appendChild(lb);
+    }
+
+    const lbImg  = document.getElementById('lb-img');
+    const lbPrev = document.getElementById('lb-prev');
+    const lbNext = document.getElementById('lb-next');
+    const lbClose = document.getElementById('lb-close');
+
+    function show(idx) {
+      lbImg.src = entries[idx].src;
+    }
+
+    function open(idx) {
+      current = idx;
+      show(current);
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      isOpen = true;
+      // Push a history entry so mobile back-button closes the lightbox
+      // instead of leaving the page
+      history.pushState({ asadLightbox: true }, '');
+    }
+
+    // closeViaHistory = false when called from the popstate handler
+    // (history already moved back; no need to call history.back() again)
+    function close(closeViaHistory) {
+      if (!isOpen) return;
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+      isOpen = false;
+      if (closeViaHistory !== false) {
+        history.back();
+      }
+    }
+
+    function prev() {
+      current = (current - 1 + entries.length) % entries.length;
+      show(current);
+    }
+
+    function next() {
+      current = (current + 1) % entries.length;
+      show(current);
+    }
+
+    // Register click handlers on each trigger
+    entries.forEach(({ clickTarget }, idx) => {
+      clickTarget.addEventListener('click', () => open(idx));
+    });
+
+    lbClose.addEventListener('click', () => close());
+    lbPrev.addEventListener('click', prev);
+    lbNext.addEventListener('click', next);
+
+    // Click backdrop to close
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+
+    // Mobile back-button support
+    window.addEventListener('popstate', () => {
+      if (isOpen) close(false);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!isOpen) return;
+      if (e.key === 'Escape')     close();
+      if (e.key === 'ArrowLeft')  prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    lb.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lb.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+    }, { passive: true });
+  })();
+
+})();
