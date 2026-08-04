@@ -1288,7 +1288,7 @@ section { padding: var(--section-py) 0; }
   border-bottom: 1px solid var(--border);
 }
 
-.footer-brand img { height: 48px; margin-bottom: 1rem; }
+.footer-brand img { height: 48px; width: auto; margin-bottom: 1rem; }
 
 .footer-tagline {
   font-family: var(--font-display);
