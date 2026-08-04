@@ -86,7 +86,7 @@
           <div class="contact-form">
             <span class="accent-line"></span>
             <h3>Send Us a Message</h3>
-            <form action="mailto:info@asad.co.za" method="post" enctype="text/plain">
+            <form id="contact-form" action="contact.php" method="POST">
               <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" placeholder="John Smith" required>
@@ -107,9 +107,17 @@
                 <label for="message">Your Message</label>
                 <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
               </div>
+              <!-- Honeypot: hidden from humans, catches bots -->
+              <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
               <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message</button>
+              <p class="form-error" id="form-error" role="alert" hidden>Something went wrong. Please try again, or WhatsApp us instead.</p>
               <p class="form-note">We typically respond within 1 business day.</p>
             </form>
+            <div class="form-success" id="form-success" hidden>
+              <div class="form-success-icon">✓</div>
+              <h3>Thank you for your enquiry!</h3>
+              <p>Your message has been sent successfully — we'll get back to you within 1 business day.</p>
+            </div>
           </div>
 
           <!-- Right: Details -->

@@ -41,6 +41,44 @@
     });
   }
 
+  /* --- Contact form (AJAX submit to contact.php) --- */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    const errorEl   = document.getElementById('form-error');
+    const successEl = document.getElementById('form-success');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (errorEl) errorEl.hidden = true;
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          contactForm.hidden = true;
+          if (successEl) {
+            successEl.hidden = false;
+            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
+        throw new Error('send failed');
+      } catch (err) {
+        if (errorEl) errorEl.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+    });
+  }
+
   /* --- Hero bg loaded animation --- */
   const heroBg = document.getElementById('hero-bg');
   if (heroBg) {
