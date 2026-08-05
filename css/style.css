@@ -719,6 +719,13 @@ section { padding: var(--section-py) 0; }
 
 .service-img-grid img:hover { transform: scale(1.04); opacity: 0.9; }
 
+.service-img-col { display: flex; flex-direction: column; }
+
+.service-view-all {
+  align-self: flex-start;
+  margin-top: 1.25rem;
+}
+
 .service-text .btn { margin-top: 2rem; }
 
 /* ============================================================
