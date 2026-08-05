@@ -24,6 +24,29 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Credentials come from GitHub Secrets and are written straight into the
+      # deploy folder — they are never committed to the repository.
+      # Only SMTP_PASS is strictly required — the rest default to the
+      # Afrihost settings verified for asad.co.za.
+      - name: Generate mail config
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST || 'mail.asad.co.za' }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT || '587' }}
+          SMTP_USER: ${{ secrets.SMTP_USER || 'info@asad.co.za' }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO:   ${{ secrets.MAIL_TO   || 'info@asad.co.za' }}
+        run: |
+          php_escape() { printf '%s' "$1" | sed "s/\\\\/\\\\\\\\/g; s/'/\\\\'/g"; }
+          {
+            echo '<?php'
+            echo "define('SMTP_HOST', '$(php_escape "$SMTP_HOST")');"
+            echo "define('SMTP_PORT', $(printf '%d' "$SMTP_PORT"));"
+            echo "define('SMTP_USER', '$(php_escape "$SMTP_USER")');"
+            echo "define('SMTP_PASS', '$(php_escape "$SMTP_PASS")');"
+            echo "define('MAIL_TO',   '$(php_escape "$MAIL_TO")');"
+          } > dist/mail-config.php
+          echo "mail-config.php written (SMTP_PASS set: $([ -n "$SMTP_PASS" ] && echo yes || echo 'NO - form will not send'))"
+
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

@@ -1,2 +1,7 @@
 node_modules/
 dist/
+
+# Mail credentials — generated at deploy time from GitHub Secrets.
+# Must never be committed.
+mail-config.php
+public/mail-config.php
