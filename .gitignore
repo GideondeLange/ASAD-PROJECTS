@@ -1,6 +1,10 @@
 node_modules/
 dist/
 
+# Raw/unprocessed source photo drops — chosen photos get copied into
+# public/images/chosen/ and processed by the build; originals stay local.
+ASAD WEBSITE EXTRA/
+
 # Mail credentials — generated at deploy time from GitHub Secrets.
 # Must never be committed.
 mail-config.php
