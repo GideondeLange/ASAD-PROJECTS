@@ -995,11 +995,34 @@ section { padding: var(--section-py) 0; }
   margin-bottom: 0.75rem;
 }
 
+.pod-card-icons {
+  display: flex;
+  gap: 1.1rem;
+  margin-bottom: 1.1rem;
+}
+
+.pod-card-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pod-card-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.pod-card-icon span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
 .pod-card-specs {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
   flex: 1;
 }
 
@@ -1012,6 +1035,18 @@ section { padding: var(--section-py) 0; }
   color: var(--accent) !important;
   font-weight: 700;
   font-size: 1.15rem !important;
+}
+
+.pod-card-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.pod-card-note.pod-card-terms {
+  font-style: italic;
+  opacity: 0.75;
+  margin-bottom: 1.1rem;
 }
 
 .pod-card-btn {
