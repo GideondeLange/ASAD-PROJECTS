@@ -1610,3 +1610,24 @@ section { padding: var(--section-py) 0; }
 @media (max-width: 480px) {
   .blog-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   BIDWELL PAGE — visual-only reorder
+   Pricing displays before the hero for visitors, while the hero
+   (and its H1) stays first in the actual page source for SEO.
+   ============================================================ */
+
+.bidwell-main {
+  display: flex;
+  flex-direction: column;
+}
+.bidwell-main > *:nth-child(1) { order: 20; } /* hero — visually 2nd */
+.bidwell-main > *:nth-child(2) { order: 10; } /* pricing — visually 1st */
+.bidwell-main > *:nth-child(3) { order: 30; }
+.bidwell-main > *:nth-child(4) { order: 40; }
+.bidwell-main > *:nth-child(5) { order: 50; }
+.bidwell-main > *:nth-child(6) { order: 60; }
+.bidwell-main > *:nth-child(7) { order: 70; }
+.bidwell-main > *:nth-child(8) { order: 80; }
+.bidwell-main > *:nth-child(9) { order: 90; }
+.bidwell-main > *:nth-child(10) { order: 100; }
