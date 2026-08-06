@@ -232,6 +232,29 @@ p { color: var(--text-muted); line-height: 1.75; }
   color: var(--accent);
 }
 
+.nav-links > li > a.nav-featured {
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-weight: 700;
+  padding: 0.5rem 1.1rem;
+}
+
+.nav-links > li > a.nav-featured:hover,
+.nav-links > li > a.nav-featured.active {
+  background: transparent;
+  color: var(--accent);
+}
+
+.nav-links > li > a.nav-featured.active::after { content: none; }
+
+.nav-mobile a.nav-featured {
+  color: var(--accent);
+  font-weight: 700;
+  background: var(--accent-dim);
+}
+
 .nav-links > li > a.active::after {
   content: '';
   position: absolute;
