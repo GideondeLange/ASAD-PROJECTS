@@ -976,7 +976,7 @@ section { padding: var(--section-py) 0; }
 
 .pod-card > img {
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 1440/928;
   object-fit: cover;
   display: block;
 }
