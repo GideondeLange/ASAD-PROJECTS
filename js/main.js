@@ -48,6 +48,15 @@
     const successEl = document.getElementById('form-success');
     const submitBtn = contactForm.querySelector('button[type="submit"]');
 
+    // Prefill "Service Interested In" when arriving via a Bidwell pod's
+    // Enquire button (contact.html?pod=Pod%201)
+    const params = new URLSearchParams(window.location.search);
+    const podParam = params.get('pod');
+    const serviceField = document.getElementById('service');
+    if (podParam && serviceField) {
+      serviceField.value = podParam;
+    }
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (errorEl) errorEl.hidden = true;
