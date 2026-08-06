@@ -33,9 +33,9 @@ async function processHtml(file) {
   const imgTags = [...html.matchAll(/<img\b[^>]*>/g)].map(m => m[0])
   let changed = 0
 
+  let corrected = 0
+
   for (const tag of imgTags) {
-    // skip if it already declares dimensions
-    if (/\b(width|height)\s*=/.test(tag)) continue
     const srcMatch = tag.match(/src\s*=\s*["']([^"']+)["']/)
     if (!srcMatch) continue
     let src = srcMatch[1]
@@ -44,14 +44,35 @@ async function processHtml(file) {
     const dims = await getDims(src)
     if (!dims) continue
 
+    const wMatch = tag.match(/\bwidth\s*=\s*["'](\d+)["']/)
+    const hMatch = tag.match(/\bheight\s*=\s*["'](\d+)["']/)
+
+    if (wMatch && hMatch) {
+      // Already declared - correct it if the file has since been replaced at a
+      // different size. Stale values are worse than none: they reserve the wrong
+      // box and reintroduce the layout shift this script exists to prevent.
+      if (+wMatch[1] === dims.width && +hMatch[1] === dims.height) continue
+      const newTag = tag
+        .replace(/\bwidth\s*=\s*["']\d+["']/, `width="${dims.width}"`)
+        .replace(/\bheight\s*=\s*["']\d+["']/, `height="${dims.height}"`)
+      html = html.replace(tag, newTag)
+      corrected++
+      continue
+    }
+
+    if (wMatch || hMatch) continue // half-declared by hand, leave alone
+
     const newTag = tag.replace(/^<img\b/, `<img width="${dims.width}" height="${dims.height}"`)
     html = html.replace(tag, newTag)
     changed++
   }
 
-  if (changed) {
+  if (changed || corrected) {
     writeFileSync(file, html)
-    console.log(`  ${file}: added dimensions to ${changed} images`)
+    const parts = []
+    if (changed) parts.push(`added dimensions to ${changed} images`)
+    if (corrected) parts.push(`corrected ${corrected} stale`)
+    console.log(`  ${file}: ${parts.join(', ')}`)
   } else {
     console.log(`  ${file}: nothing to do`)
   }
