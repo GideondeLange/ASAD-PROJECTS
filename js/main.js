@@ -49,12 +49,13 @@
     const submitBtn = contactForm.querySelector('button[type="submit"]');
 
     // Prefill "Service Interested In" when arriving via a Bidwell pod's
-    // Enquire button (contact.html?pod=Pod%201)
+    // Enquire button (contact.html?pod=Pod%201) or a service's Get a Quote
+    // button (contact.html?service=Bespoke%20Steelwork)
     const params = new URLSearchParams(window.location.search);
-    const podParam = params.get('pod');
+    const prefillValue = params.get('pod') || params.get('service');
     const serviceField = document.getElementById('service');
-    if (podParam && serviceField) {
-      serviceField.value = podParam;
+    if (prefillValue && serviceField) {
+      serviceField.value = prefillValue;
     }
 
     contactForm.addEventListener('submit', async (e) => {
