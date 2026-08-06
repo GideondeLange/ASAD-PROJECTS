@@ -15,12 +15,14 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main:     resolve(__dirname, 'index.html'),
-        services: resolve(__dirname, 'services.html'),
-        bidwell:  resolve(__dirname, 'bidwell.html'),
-        gallery:  resolve(__dirname, 'gallery.html'),
-        contact:  resolve(__dirname, 'contact.html'),
-        projects: resolve(__dirname, 'projects.html'),
+        main:      resolve(__dirname, 'index.html'),
+        services:  resolve(__dirname, 'services.html'),
+        bidwell:   resolve(__dirname, 'bidwell.html'),
+        gallery:   resolve(__dirname, 'gallery.html'),
+        contact:   resolve(__dirname, 'contact.html'),
+        projects:  resolve(__dirname, 'projects.html'),
+        blog:      resolve(__dirname, 'blog/index.html'),
+        blogPost1: resolve(__dirname, 'blog/best-uses-for-accommodation-pods.html'),
       }
     }
   }
