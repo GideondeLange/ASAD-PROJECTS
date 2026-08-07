@@ -49,13 +49,33 @@
     const submitBtn = contactForm.querySelector('button[type="submit"]');
 
     // Prefill "Service Interested In" when arriving via a Bidwell pod's
-    // Enquire button (contact.html?pod=Pod%201) or a service's Get a Quote
-    // button (contact.html?service=Bespoke%20Steelwork)
+    // Enquire button (/contact?pod=pod-1) or a service's Get a Quote
+    // button (/contact?service=bespoke-steelwork). Links use plain slugs
+    // to keep the URL clean; this maps them back to a readable label.
+    const slugLabels = {
+      'pod-1': 'Pod 1',
+      'pod-2': 'Pod 2',
+      'pod-3': 'Pod 3',
+      'pod-4': 'Pod 4',
+      'pod-5': 'Pod 5',
+      'pod-6': 'Pod 6',
+      'concrete-roof-pod': 'Concrete Roof Pod',
+      'insulated-cement-panel': 'Insulated Cement Panel',
+      'entertainment-pod': 'Entertainment Pod',
+      'office-storage-pod': 'Office / Storage Pod',
+      'guard-house': 'Guard House',
+      'coffee-shop-pod': 'Coffee Shop Pod',
+      'bespoke-steelwork': 'Bespoke Steelwork',
+      'custom-glazed-steelwork': 'Custom Glazed Steelwork',
+      'construction-renovation': 'Construction & Renovation',
+      'carpentry-kitchens': 'Carpentry & Kitchens',
+      'pergolas-decking': 'Pergolas & Decking',
+    };
     const params = new URLSearchParams(window.location.search);
-    const prefillValue = params.get('pod') || params.get('service');
+    const slug = params.get('pod') || params.get('service');
     const serviceField = document.getElementById('service');
-    if (prefillValue && serviceField) {
-      serviceField.value = prefillValue;
+    if (slug && serviceField) {
+      serviceField.value = slugLabels[slug] || slug;
     }
 
     contactForm.addEventListener('submit', async (e) => {
