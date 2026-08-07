@@ -98,6 +98,12 @@
             successEl.hidden = false;
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              form_name: 'contact_form',
+              service_interested_in: serviceField ? serviceField.value : '',
+            });
+          }
           return;
         }
         throw new Error('send failed');
@@ -105,6 +111,22 @@
         if (errorEl) errorEl.hidden = false;
         submitBtn.disabled = false;
         submitBtn.textContent = originalLabel;
+      }
+    });
+  }
+
+  /* --- GA4 conversion tracking: WhatsApp and Enquire clicks --- */
+  if (typeof gtag === 'function') {
+    document.addEventListener('click', (e) => {
+      const waLink = e.target.closest('.btn-wa');
+      if (waLink) {
+        gtag('event', 'contact_whatsapp', { link_url: waLink.href });
+        return;
+      }
+      const enquireLink = e.target.closest('.pod-card-btn');
+      if (enquireLink) {
+        const podName = enquireLink.closest('.pod-card')?.querySelector('h3')?.textContent || '';
+        gtag('event', 'enquire_click', { pod_name: podName });
       }
     });
   }
