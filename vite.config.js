@@ -23,6 +23,7 @@ export default defineConfig({
         projects:  resolve(__dirname, 'projects.html'),
         blog:      resolve(__dirname, 'blog/index.html'),
         blogPost1: resolve(__dirname, 'blog/best-uses-for-accommodation-pods.html'),
+        blogPost2: resolve(__dirname, 'blog/why-invest-in-a-tiny-home.html'),
       }
     }
   }
