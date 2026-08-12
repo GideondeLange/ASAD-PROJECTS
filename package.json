@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "sharp": "^0.35.2",
+    "svgo": "^4.0.2",
     "vite": "^8.1.0",
     "vite-plugin-image-optimizer": "^2.0.3"
   }
