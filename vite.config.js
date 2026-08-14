@@ -25,6 +25,7 @@ export default defineConfig({
         blogPost1: resolve(__dirname, 'blog/best-uses-for-accommodation-pods.html'),
         blogPost2: resolve(__dirname, 'blog/why-invest-in-a-tiny-home.html'),
         blogPost3: resolve(__dirname, 'blog/building-an-outdoor-entertainment-area.html'),
+        blogPost4: resolve(__dirname, 'blog/tiny-home-on-stilts-tamboti-river-reserve.html'),
       }
     }
   }
