@@ -99,6 +99,13 @@
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
           if (typeof gtag === 'function') {
+            // Fires as contact_form_submit to match the Key Event configured
+            // in GA4 - also send generate_lead, GA4's own recommended event
+            // name, so both are covered.
+            gtag('event', 'contact_form_submit', {
+              form_name: 'contact_form',
+              service_interested_in: serviceField ? serviceField.value : '',
+            });
             gtag('event', 'generate_lead', {
               form_name: 'contact_form',
               service_interested_in: serviceField ? serviceField.value : '',

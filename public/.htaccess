@@ -5,6 +5,21 @@
 Options -MultiViews
 RewriteEngine On
 
+# 0. Canonical domain: force https and non-www. Google was indexing three
+#    separate addresses (http://, https://www., http://www.) as if they
+#    were different sites, splitting ranking signals three ways instead
+#    of consolidating them onto one. asad.co.za (non-www, https) is the
+#    chosen canonical - it matches the GA4 property and every canonical
+#    tag already in the page templates.
+RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://asad.co.za/$1 [R=301,L]
+
+# 0.5. Known dead pages still indexed by Google - redirect to the closest
+#      live equivalent instead of leaving them 404, so any residual
+#      ranking value carries over instead of leaking to a dead end.
+RewriteRule ^contact-luxury-renovations/?$ /contact [R=301,L]
+
 # 1. External redirect: if a visitor or old bookmark hits *.html directly,
 #    send them to the clean URL with a permanent (301) redirect so search
 #    engines transfer ranking signals to the new URL instead of treating
