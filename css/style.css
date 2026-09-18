@@ -850,17 +850,17 @@ section { padding: var(--section-py) 0; }
 #lb-close:hover { background: rgba(200,168,75,0.3); }
 
 /* ============================================================
-   BIDWELL PAGE
+   ASAD PAGE
    ============================================================ */
 
 /* Intro paragraph */
-.bidwell-intro {
+.asad-intro {
   text-align: center;
   padding-top: clamp(3rem, 6vw, 5rem);
   padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
-.bidwell-intro p {
+.asad-intro p {
   max-width: 820px;
   margin: 1.5rem auto 0;
   font-size: clamp(0.95rem, 1.6vw, 1.08rem);
@@ -868,13 +868,13 @@ section { padding: var(--section-py) 0; }
   color: var(--text-muted);
 }
 
-.bidwell-intro p strong {
+.asad-intro p strong {
   color: var(--text);
   font-weight: 600;
 }
 
 /* Benefits / Key Features centered list */
-.bidwell-info-list {
+.asad-info-list {
   max-width: 860px;
   margin: 0 auto;
   display: flex;
@@ -883,7 +883,7 @@ section { padding: var(--section-py) 0; }
   list-style: none;
 }
 
-.bidwell-info-list li {
+.asad-info-list li {
   color: var(--text-muted);
   font-size: 0.97rem;
   line-height: 1.75;
@@ -893,18 +893,18 @@ section { padding: var(--section-py) 0; }
   padding-bottom: 1.1rem;
 }
 
-.bidwell-info-list li:last-child {
+.asad-info-list li:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.bidwell-info-list li strong {
+.asad-info-list li strong {
   color: var(--accent);
   font-weight: 600;
 }
 
 /* Financing banner */
-.bidwell-finance-banner {
+.asad-finance-banner {
   background: var(--surface);
   border-top: 2px solid var(--accent);
   border-bottom: 2px solid var(--accent);
@@ -912,7 +912,7 @@ section { padding: var(--section-py) 0; }
   text-align: center;
 }
 
-.bidwell-finance-banner h2 {
+.asad-finance-banner h2 {
   font-size: clamp(1.8rem, 4vw, 3rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -920,7 +920,7 @@ section { padding: var(--section-py) 0; }
   margin-bottom: 0.75rem;
 }
 
-.bidwell-finance-banner p {
+.asad-finance-banner p {
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -1612,22 +1612,22 @@ section { padding: var(--section-py) 0; }
 }
 
 /* ============================================================
-   BIDWELL PAGE — visual-only reorder
+   ASAD PAGE — visual-only reorder
    Pricing displays before the hero for visitors, while the hero
    (and its H1) stays first in the actual page source for SEO.
    ============================================================ */
 
-.bidwell-main {
+.asad-main {
   display: flex;
   flex-direction: column;
 }
-.bidwell-main > *:nth-child(1) { order: 20; } /* hero — visually 2nd */
-.bidwell-main > *:nth-child(2) { order: 10; } /* pricing — visually 1st */
-.bidwell-main > *:nth-child(3) { order: 30; }
-.bidwell-main > *:nth-child(4) { order: 40; }
-.bidwell-main > *:nth-child(5) { order: 50; }
-.bidwell-main > *:nth-child(6) { order: 60; }
-.bidwell-main > *:nth-child(7) { order: 70; }
-.bidwell-main > *:nth-child(8) { order: 80; }
-.bidwell-main > *:nth-child(9) { order: 90; }
-.bidwell-main > *:nth-child(10) { order: 100; }
+.asad-main > *:nth-child(1) { order: 20; } /* hero — visually 2nd */
+.asad-main > *:nth-child(2) { order: 10; } /* pricing — visually 1st */
+.asad-main > *:nth-child(3) { order: 30; }
+.asad-main > *:nth-child(4) { order: 40; }
+.asad-main > *:nth-child(5) { order: 50; }
+.asad-main > *:nth-child(6) { order: 60; }
+.asad-main > *:nth-child(7) { order: 70; }
+.asad-main > *:nth-child(8) { order: 80; }
+.asad-main > *:nth-child(9) { order: 90; }
+.asad-main > *:nth-child(10) { order: 100; }

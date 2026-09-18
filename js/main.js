@@ -48,7 +48,7 @@
     const successEl = document.getElementById('form-success');
     const submitBtn = contactForm.querySelector('button[type="submit"]');
 
-    // Prefill "Service Interested In" when arriving via a Bidwell pod's
+    // Prefill "Service Interested In" when arriving via a ASAD pod's
     // Enquire button (/contact?pod=pod-1) or a service's Get a Quote
     // button (/contact?service=bespoke-steelwork). Links use plain slugs
     // to keep the URL clean; this maps them back to a readable label.
@@ -60,7 +60,6 @@
       'pod-5': 'Pod 5',
       'pod-6': 'Pod 6',
       'concrete-roof-pod': 'Concrete Roof Pod',
-      'insulated-cement-panel': 'Insulated Cement Panel',
       'entertainment-pod': 'Entertainment Pod',
       'office-storage-pod': 'Office / Storage Pod',
       'guard-house': 'Guard House',

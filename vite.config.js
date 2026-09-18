@@ -17,7 +17,7 @@ export default defineConfig({
       input: {
         main:      resolve(__dirname, 'index.html'),
         services:  resolve(__dirname, 'services.html'),
-        bidwell:   resolve(__dirname, 'bidwell.html'),
+        asadPods:  resolve(__dirname, 'asad-pods.html'),
         gallery:   resolve(__dirname, 'gallery.html'),
         contact:   resolve(__dirname, 'contact.html'),
         projects:  resolve(__dirname, 'projects.html'),
@@ -26,6 +26,9 @@ export default defineConfig({
         blogPost2: resolve(__dirname, 'blog/why-invest-in-a-tiny-home.html'),
         blogPost3: resolve(__dirname, 'blog/building-an-outdoor-entertainment-area.html'),
         blogPost4: resolve(__dirname, 'blog/tiny-home-on-stilts-tamboti-river-reserve.html'),
+        pod1:      resolve(__dirname, 'asad-pods/pod-1.html'),
+        pod3:      resolve(__dirname, 'asad-pods/pod-3.html'),
+        podEntertainment: resolve(__dirname, 'asad-pods/entertainment-pod.html'),
       }
     }
   }

@@ -20,6 +20,14 @@ RewriteRule ^(.*)$ https://asad.co.za/$1 [R=301,L]
 #      ranking value carries over instead of leaking to a dead end.
 RewriteRule ^contact-luxury-renovations/?$ /contact [R=301,L]
 
+# 0.6. Bidwell -> ASAD rebrand: /bidwell was live and indexed under that
+#      name; redirect it and its sub-pages to the new /asad-pods URLs so
+#      the existing ranking signal transfers instead of 404ing.
+RewriteRule ^bidwell/pod-1/?$ /asad-pods/pod-1 [R=301,L]
+RewriteRule ^bidwell/pod-3/?$ /asad-pods/pod-3 [R=301,L]
+RewriteRule ^bidwell/entertainment-pod/?$ /asad-pods/entertainment-pod [R=301,L]
+RewriteRule ^bidwell/?$ /asad-pods [R=301,L]
+
 # 1. External redirect: if a visitor or old bookmark hits *.html directly,
 #    send them to the clean URL with a permanent (301) redirect so search
 #    engines transfer ranking signals to the new URL instead of treating
