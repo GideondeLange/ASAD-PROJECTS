@@ -26,6 +26,7 @@ export default defineConfig({
         blogPost2: resolve(__dirname, 'blog/why-invest-in-a-tiny-home.html'),
         blogPost3: resolve(__dirname, 'blog/building-an-outdoor-entertainment-area.html'),
         blogPost4: resolve(__dirname, 'blog/tiny-home-on-stilts-tamboti-river-reserve.html'),
+        pod2bed:   resolve(__dirname, 'asad-pods/2-bedroom.html'),
         pod1:      resolve(__dirname, 'asad-pods/pod-1.html'),
         pod3:      resolve(__dirname, 'asad-pods/pod-3.html'),
         podEntertainment: resolve(__dirname, 'asad-pods/entertainment-pod.html'),

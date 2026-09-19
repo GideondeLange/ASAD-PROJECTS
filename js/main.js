@@ -53,6 +53,8 @@
     // button (/contact?service=bespoke-steelwork). Links use plain slugs
     // to keep the URL clean; this maps them back to a readable label.
     const slugLabels = {
+      '2-bedroom': '2 Bedroom Pod',
+      '3-bedroom': '3 Bedroom Pod',
       'pod-1': 'Pod 1',
       'pod-2': 'Pod 2',
       'pod-3': 'Pod 3',
