@@ -28,6 +28,13 @@ RewriteRule ^bidwell/pod-3/?$ /asad-pods/pod-3 [R=301,L]
 RewriteRule ^bidwell/entertainment-pod/?$ /asad-pods/entertainment-pod [R=301,L]
 RewriteRule ^bidwell/?$ /asad-pods [R=301,L]
 
+# 0.7. /asad-pods also exists as a directory on disk (asad-pods/pod-1.html
+#      etc.), so the generic rule below (which requires !-d) never fires
+#      for it - Apache resolves "/asad-pods" straight to that directory,
+#      finds no index file in it, and 403s instead of serving
+#      asad-pods.html. Serve it explicitly before that generic rule runs.
+RewriteRule ^asad-pods/?$ /asad-pods.html [L]
+
 # 1. External redirect: if a visitor or old bookmark hits *.html directly,
 #    send them to the clean URL with a permanent (301) redirect so search
 #    engines transfer ranking signals to the new URL instead of treating
