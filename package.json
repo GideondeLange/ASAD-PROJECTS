@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "pages": "node scripts/site/make-web-images.mjs && node scripts/site/build.mjs",
     "build": "node scripts/autorotate.js && node scripts/imgdims.js && vite build",
     "preview": "vite preview"
   },

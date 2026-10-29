@@ -1,7 +1,9 @@
-/* Asad Projects — Shared JS */
+/* ASAD Living Pods — shared JS */
 
 (function () {
   'use strict';
+
+  document.documentElement.classList.add('js');
 
   /* --- Navbar scroll state --- */
   const navbar = document.getElementById('navbar');
@@ -11,35 +13,52 @@
     onScroll();
   }
 
-  /* --- Mobile hamburger --- */
-  const hamburger = document.getElementById('nav-hamburger');
+  /* --- Mobile menu --- */
+  const toggle = document.getElementById('nav-hamburger');
   const mobileMenu = document.getElementById('nav-mobile');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      hamburger.classList.toggle('open', open);
-      hamburger.setAttribute('aria-expanded', open);
+  if (toggle && mobileMenu) {
+    const setOpen = (open) => {
+      mobileMenu.classList.toggle('open', open);
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-    });
+    };
+    toggle.addEventListener('click', () => setOpen(!mobileMenu.classList.contains('open')));
+    mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
   }
 
-  /* --- Mobile services sub-menu toggle --- */
-  const mobileServicesToggle = document.getElementById('mobile-services-toggle');
-  const mobileSub = document.getElementById('mobile-sub');
-  if (mobileServicesToggle && mobileSub) {
-    mobileServicesToggle.addEventListener('click', () => {
-      mobileSub.classList.toggle('open');
-    });
+  /* --- Reveal on scroll --- */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      revealEls.forEach((el) => io.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('in'));
+    }
   }
+
+  /* --- Filter bars (pods index, gallery): button[data-cat] shows items with a matching data-cat --- */
+  document.querySelectorAll('.filter-bar[data-target]').forEach((bar) => {
+    const items = document.querySelectorAll(`${bar.dataset.target} [data-cat]`);
+    const apply = (cat) => {
+      bar.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b.dataset.cat === cat));
+      items.forEach((el) => el.classList.toggle('hidden', cat !== 'all' && el.dataset.cat !== cat));
+    };
+    bar.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-cat]');
+      if (!btn) return;
+      apply(btn.dataset.cat);
+      history.replaceState(null, '', btn.dataset.cat === 'all' ? location.pathname : '#' + btn.dataset.cat);
+    });
+    const initial = location.hash.slice(1);
+    if (initial && bar.querySelector(`button[data-cat="${initial}"]`)) apply(initial);
+  });
 
   /* --- Contact form (AJAX submit to contact.php) --- */
   const contactForm = document.getElementById('contact-form');
@@ -47,36 +66,15 @@
     const errorEl   = document.getElementById('form-error');
     const successEl = document.getElementById('form-success');
     const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const serviceField = document.getElementById('service');
 
-    // Prefill "Service Interested In" when arriving via a ASAD pod's
-    // Enquire button (/contact?pod=pod-1) or a service's Get a Quote
-    // button (/contact?service=bespoke-steelwork). Links use plain slugs
-    // to keep the URL clean; this maps them back to a readable label.
-    const slugLabels = {
-      '2-bedroom': '2 Bedroom Pod',
-      '3-bedroom': '3 Bedroom Pod',
-      'pod-1': 'Pod 1',
-      'pod-2': 'Pod 2',
-      'pod-3': 'Pod 3',
-      'pod-4': 'Pod 4',
-      'pod-5': 'Pod 5',
-      'pod-6': 'Pod 6',
-      'concrete-roof-pod': 'Concrete Roof Pod',
-      'entertainment-pod': 'Entertainment Pod',
-      'office-storage-pod': 'Office / Storage Pod',
-      'guard-house': 'Guard House',
-      'coffee-shop-pod': 'Coffee Shop Pod',
-      'bespoke-steelwork': 'Bespoke Steelwork',
-      'custom-glazed-steelwork': 'Custom Glazed Steelwork',
-      'construction-renovation': 'Construction & Renovation',
-      'carpentry-kitchens': 'Carpentry & Kitchens',
-      'pergolas-decking': 'Pergolas & Decking',
-    };
+    // Prefill the pod field when arriving via an Enquire button (/contact?pod=pod-1).
+    // The list of slugs is read from the datalist so it never goes out of date.
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('pod') || params.get('service');
-    const serviceField = document.getElementById('service');
     if (slug && serviceField) {
-      serviceField.value = slugLabels[slug] || slug;
+      const opt = document.querySelector(`#pod-options option[data-slug="${CSS.escape(slug)}"]`);
+      serviceField.value = opt ? opt.value : slug;
     }
 
     contactForm.addEventListener('submit', async (e) => {
@@ -100,9 +98,8 @@
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
           if (typeof gtag === 'function') {
-            // Fires as contact_form_submit to match the Key Event configured
-            // in GA4 - also send generate_lead, GA4's own recommended event
-            // name, so both are covered.
+            // contact_form_submit matches the Key Event configured in GA4;
+            // generate_lead is GA4's own recommended event name.
             gtag('event', 'contact_form_submit', {
               form_name: 'contact_form',
               service_interested_in: serviceField ? serviceField.value : '',
@@ -126,142 +123,87 @@
   /* --- GA4 conversion tracking: WhatsApp and Enquire clicks --- */
   if (typeof gtag === 'function') {
     document.addEventListener('click', (e) => {
-      const waLink = e.target.closest('.btn-wa');
+      const waLink = e.target.closest('[data-wa]');
       if (waLink) {
         gtag('event', 'contact_whatsapp', { link_url: waLink.href });
         return;
       }
-      const enquireLink = e.target.closest('.pod-card-btn');
+      const enquireLink = e.target.closest('[data-enquire]');
       if (enquireLink) {
-        const podName = enquireLink.closest('.pod-card')?.querySelector('h3')?.textContent || '';
-        gtag('event', 'enquire_click', { pod_name: podName });
+        gtag('event', 'enquire_click', { pod_name: enquireLink.dataset.enquire });
       }
     });
   }
 
-  /* --- Hero bg loaded animation --- */
-  const heroBg = document.getElementById('hero-bg');
-  if (heroBg) {
-    const bgUrl = heroBg.style.backgroundImage.replace(/url\(['"]?|['"]?\)/g, '');
-    if (bgUrl) {
-      const img = new Image();
-      img.onload = () => heroBg.classList.add('loaded');
-      img.src = bgUrl;
-    }
-  }
-
   /* ----------------------------------------------------------------
-     LIGHTBOX
-     Works on:
-       • Gallery page  → .masonry-item (div wrapping an img)
-       • Services page → .service-img-grid img (direct img elements)
-     Mobile back-button: pushState on open, popstate closes lightbox
-     so pressing Back returns the user to their exact scroll position.
+     LIGHTBOX — gallery page (.masonry-item) and finishes page (.lb-trigger).
+     Mobile back-button: pushState on open, popstate closes the lightbox so
+     pressing Back returns the visitor to their exact scroll position.
   ---------------------------------------------------------------- */
   (function () {
-    // Collect all triggers and their full-res src
-    const masonryItems  = [...document.querySelectorAll('.masonry-item')];
-    const serviceImages = [...document.querySelectorAll('.service-img-grid img')];
+    const triggers = [...document.querySelectorAll('.masonry-item, .lb-trigger')];
+    if (!triggers.length) return;
 
-    if (!masonryItems.length && !serviceImages.length) return;
-
-    // Build unified list: { clickTarget, src }
-    const entries = [
-      ...masonryItems.map(el => ({ clickTarget: el, src: el.querySelector('img').src })),
-      ...serviceImages.map(img => ({ clickTarget: img, src: img.src }))
-    ];
-
+    const all = triggers.map((el) => ({ el, src: (el.querySelector('img') || el).src, alt: (el.querySelector('img') || el).alt || '' }));
+    // only the images currently shown (a gallery section may be filtered), refreshed on every open
+    let entries = all;
     let current = 0;
-    let isOpen  = false;
+    let isOpen = false;
 
-    // Create lightbox DOM if not already in the HTML (gallery.html has it; services doesn't)
     let lb = document.getElementById('lightbox');
     if (!lb) {
       lb = document.createElement('div');
       lb.id = 'lightbox';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
       lb.innerHTML =
-        '<div class="lb-inner"><img id="lb-img" src="" alt="Project image"></div>' +
-        '<button id="lb-prev" class="lb-btn">&#8249;</button>' +
-        '<button id="lb-next" class="lb-btn">&#8250;</button>' +
-        '<button id="lb-close" class="lb-btn">&times;</button>';
+        '<div class="lb-inner"><img id="lb-img" src="" alt=""></div>' +
+        '<button id="lb-prev" class="lb-btn" aria-label="Previous">&#8249;</button>' +
+        '<button id="lb-next" class="lb-btn" aria-label="Next">&#8250;</button>' +
+        '<button id="lb-close" class="lb-btn" aria-label="Close">&times;</button>';
       document.body.appendChild(lb);
     }
+    const lbImg = document.getElementById('lb-img');
 
-    const lbImg  = document.getElementById('lb-img');
-    const lbPrev = document.getElementById('lb-prev');
-    const lbNext = document.getElementById('lb-next');
-    const lbClose = document.getElementById('lb-close');
-
-    function show(idx) {
-      lbImg.src = entries[idx].src;
-    }
-
-    function open(idx) {
-      current = idx;
-      show(current);
+    const show = (i) => { lbImg.src = entries[i].src; lbImg.alt = entries[i].alt; };
+    const open = (i) => {
+      current = i; show(i);
       lb.classList.add('active');
       document.body.style.overflow = 'hidden';
       isOpen = true;
-      // Push a history entry so mobile back-button closes the lightbox
-      // instead of leaving the page
       history.pushState({ asadLightbox: true }, '');
-    }
-
-    // closeViaHistory = false when called from the popstate handler
-    // (history already moved back; no need to call history.back() again)
-    function close(closeViaHistory) {
+    };
+    // viaHistory is false when called from popstate (history already moved back)
+    const close = (viaHistory) => {
       if (!isOpen) return;
       lb.classList.remove('active');
       document.body.style.overflow = '';
       isOpen = false;
-      if (closeViaHistory !== false) {
-        history.back();
-      }
-    }
+      if (viaHistory !== false) history.back();
+    };
+    const prev = () => { current = (current - 1 + entries.length) % entries.length; show(current); };
+    const next = () => { current = (current + 1) % entries.length; show(current); };
 
-    function prev() {
-      current = (current - 1 + entries.length) % entries.length;
-      show(current);
-    }
-
-    function next() {
-      current = (current + 1) % entries.length;
-      show(current);
-    }
-
-    // Register click handlers on each trigger
-    entries.forEach(({ clickTarget }, idx) => {
-      clickTarget.addEventListener('click', () => open(idx));
-    });
-
-    lbClose.addEventListener('click', () => close());
-    lbPrev.addEventListener('click', prev);
-    lbNext.addEventListener('click', next);
-
-    // Click backdrop to close
+    all.forEach((entry) => entry.el.addEventListener('click', () => {
+      entries = all.filter((x) => !x.el.classList.contains('hidden'));
+      open(entries.indexOf(entry));
+    }));
+    document.getElementById('lb-close').addEventListener('click', () => close());
+    document.getElementById('lb-prev').addEventListener('click', prev);
+    document.getElementById('lb-next').addEventListener('click', next);
     lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
-
-    // Mobile back-button support
-    window.addEventListener('popstate', () => {
-      if (isOpen) close(false);
-    });
-
-    // Keyboard navigation
+    window.addEventListener('popstate', () => { if (isOpen) close(false); });
     document.addEventListener('keydown', (e) => {
       if (!isOpen) return;
-      if (e.key === 'Escape')     close();
-      if (e.key === 'ArrowLeft')  prev();
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
       if (e.key === 'ArrowRight') next();
     });
-
-    // Touch swipe support for mobile
     let touchStartX = 0;
-    lb.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].clientX;
-    }, { passive: true });
+    lb.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
     lb.addEventListener('touchend', (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+      if (Math.abs(dx) > 50) (dx < 0 ? next : prev)();
     }, { passive: true });
   })();
 
