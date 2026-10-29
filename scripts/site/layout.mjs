@@ -67,8 +67,7 @@ export function nav(active = '') {
   <header id="navbar" class="site-nav">
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="ASAD Living Pods — home">
-        <span class="brand-mark">ASAD</span>
-        <span class="brand-sub">Living Pods</span>
+        <img src="/images/shared/asad-projects-logo-v4.png" width="1025" height="220" alt="ASAD Projects, ASAD Living Pods, ASAD Construction, Cus Con Fur, ASAD Structural, NHBRC">
       </a>
       <nav aria-label="Main navigation">
         <ul class="nav-links">
@@ -98,8 +97,7 @@ export function footer(pods) {
       <div class="footer-grid">
         <div class="footer-brand">
           <a class="brand" href="/" aria-label="ASAD Living Pods — home">
-            <span class="brand-mark">ASAD</span>
-            <span class="brand-sub">Living Pods</span>
+            <img src="/images/shared/asad-projects-logo-v4.png" width="1025" height="220" alt="ASAD Projects, ASAD Living Pods, ASAD Construction, Cus Con Fur, ASAD Structural, NHBRC" loading="lazy">
           </a>
           <p>Bespoke compact accommodation, built in steel and timber.</p>
         </div>

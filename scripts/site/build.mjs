@@ -433,11 +433,22 @@ ${ctaBand(PODS)}
 
 /* ───────────────────────────── GALLERY ───────────────────────────── */
 async function gallery() {
-  const counts = Object.fromEntries(GALLERY_CATS.map(([k]) => [k, GALLERY.filter((g) => g.cat === k).length]));
-  const items = [];
-  for (const [i, g] of GALLERY.entries()) {
-    const src = webImg(g.file);
-    items.push(`          <div class="masonry-item" data-cat="${g.cat}"><img ${await dims(src)} src="${src}" alt="${esc(g.alt)} ${i + 1}" loading="lazy"></div>`);
+  const sections = [];
+  let counter = 0;
+  for (const [key, label] of GALLERY_CATS) {
+    const inCat = GALLERY.filter((g) => g.cat === key);
+    const items = [];
+    for (const g of inCat) {
+      const src = webImg(g.file);
+      items.push(`            <div class="masonry-item"><img ${await dims(src)} src="${src}" alt="${esc(g.alt)} ${++counter}" loading="lazy"></div>`);
+    }
+    sections.push(`
+        <section class="gallery-section" id="${key}">
+          <div class="gallery-section-head"><h2>${esc(label)}</h2><span>${inCat.length} photos</span></div>
+          <div class="masonry-grid">
+${items.join('\n')}
+          </div>
+        </section>`);
   }
   const html = head({
     title: 'Gallery | ASAD Living Pods',
@@ -454,13 +465,10 @@ async function gallery() {
     </header>
     <section class="section-tight section-dark" style="padding-bottom:clamp(4rem,8vw,7rem)">
       <div class="container">
-        <div class="filter-bar" id="gallery-filter" data-target="#gallery-list" role="group" aria-label="Filter gallery">
-          <button type="button" class="active" data-cat="all">All <sup>${GALLERY.length}</sup></button>
-${GALLERY_CATS.map(([k, label]) => `          <button type="button" data-cat="${k}">${esc(label)} <sup>${counts[k]}</sup></button>`).join('\n')}
-        </div>
-        <div class="masonry-grid" id="gallery-list">
-${items.join('\n')}
-        </div>
+        <nav class="filter-bar jump" aria-label="Gallery sections">
+${GALLERY_CATS.map(([k, label]) => `          <a href="#${k}">${esc(label)}</a>`).join('\n')}
+        </nav>
+${sections.join('\n')}
       </div>
     </section>
 ${ctaBand(PODS)}

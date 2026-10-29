@@ -15,11 +15,9 @@ export const GALLERY_CATS = [
 const range = (prefix, nums) => nums.map((n) => `${prefix}${n}`);
 
 export const GALLERY = [
-  // Pods: the 14 designs, then real builds
-  ...[
-    '2-bedroom', '2-bedroom-living-unit', '3-bedroom', '1-bedroom-living-unit', 'pod-1', 'pod-2', 'pod-4', 'pod-5', 'pod-6',
-    'entertainment-pod', 'office-storage-pod', 'guard-house', 'coffee-shop-pod', 'roof-top-pod',
-  ].map((s) => ({ file: `/images/pods/${s}.jpg`, cat: 'pods', alt: 'ASAD pod design' })),
+  // Pods: real photos only. The brochure's AI renders stay out of the gallery;
+  // pod-5 and office-storage-pod are the only brochure images that are real photos.
+  ...['pod-5', 'office-storage-pod'].map((s) => ({ file: `/images/pods/${s}.jpg`, cat: 'pods', alt: 'ASAD pod' })),
   ...range('asad-pod', [1, 2, 3, 4, 5, 10, 13, 14, 17, 25]).map((f) => ({ file: f, cat: 'pods', alt: 'ASAD pod' })),
 
   ...range('asad-pod', [12, 21, 22]).map((f) => ({ file: f, cat: 'exterior', alt: 'ASAD pod exterior' })),
