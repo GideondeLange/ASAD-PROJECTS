@@ -263,7 +263,7 @@ ${p.note ? `            <p class="note">${esc(p.note)}</p>` : ''}
   const side = p.plan
     ? `<div class="reveal"><div class="plan-box"><img ${await dims(p.plan)} src="${p.plan}" alt="${esc(p.name)} floor plan, ${p.size} m²" loading="lazy"></div><p class="plan-cap">Floor plan · ${p.size} m²</p></div>`
     : extra
-      ? `<div class="media tall gray reveal"><img ${await dims('/images/pods/' + extra + '.jpg')} src="/images/pods/${extra}.jpg" alt="${esc(p.name)} — alternative view" loading="lazy"></div>`
+      ? `<div class="media tall reveal"><img ${await dims('/images/pods/' + extra + '.jpg')} src="/images/pods/${extra}.jpg" alt="${esc(p.name)} — alternative view" loading="lazy"></div>`
       : '';
 
   const html = head({
