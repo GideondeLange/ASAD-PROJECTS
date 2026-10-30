@@ -221,12 +221,6 @@ ${Object.entries(CATEGORIES).map(([k, c]) => `          <button type="button" da
       </div>
     </section>
 
-    <section class="section section-dark">
-      <div class="container two-col">
-        <div><span class="eyebrow">Finance</span><h2 class="reveal">We offer financing on our pods <em>and on the land.</em></h2></div>
-        <div class="copy reveal d1"><p class="lead">Talk to us about flexible terms for your pod and your plot.</p><a class="link-arrow" href="/contact">Ask about finance</a></div>
-      </div>
-    </section>
 ${ctaBand(PODS)}
   </main>
 ` + footer(PODS);
