@@ -78,7 +78,7 @@ async function home() {
   <main id="main">
 
     <section class="hero">
-      <div class="hero-bg"><img src="/images/web/asad-pod5.jpg" width="1600" height="1600" alt="ASAD A-frame pod on stilts among boulders" fetchpriority="high"></div>
+      <div class="hero-bg"><img src="/images/web/home-hero.jpg" width="960" height="1280" alt="ASAD A-frame pod on a steel base in the bush" style="object-position:50% 38%" fetchpriority="high"></div>
       <div class="hero-content">
         <span class="eyebrow">Residential · Commercial · Off-grid</span>
         <h1>Compact living, <em>built to last.</em></h1>
