@@ -60,6 +60,17 @@
     if (initial && bar.querySelector(`button[data-cat="${initial}"]`)) apply(initial);
   });
 
+  /* --- Touch screens: light a photo up while it is in the middle of the screen --- */
+  if (window.matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+    const litObserver = new IntersectionObserver((entries) => {
+      entries.forEach((en) => en.target.classList.toggle('lit', en.isIntersecting));
+    }, { rootMargin: '-32% 0px -32% 0px', threshold: 0 });
+    document.querySelectorAll('.media, .masonry-item, .blog-card-img').forEach((el) => {
+      if (el.closest('.hero, .page-head, .pod-hero')) return;
+      litObserver.observe(el);
+    });
+  }
+
   /* --- Contact form (AJAX submit to contact.php) --- */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {

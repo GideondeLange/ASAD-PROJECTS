@@ -499,9 +499,12 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
   .mini-grid { grid-template-columns: repeat(2, 1fr); }
   .price-table li { flex-direction: column; gap: 0.4rem; }
 }
+/* Touch screens have no hover, so the photo "lights up" to colour while it is in the
+   middle of the screen (main.js adds .lit) and fades back to grey once it has scrolled past. */
 @media (hover: none) {
   .pod-card .media::after { display: none; }
-  .media.gray img, .masonry-item img, .blog-card-img img, .mini-grid .media img { filter: grayscale(0.4); }
+  .media.gray img, .masonry-item img, .blog-card-img img, .mini-grid .media img, .svc-grid .media img { filter: grayscale(1) contrast(1.04); transition: filter 0.9s var(--ease), transform 1.4s var(--ease); }
+  .lit img { filter: grayscale(0) !important; transform: scale(1.03); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
