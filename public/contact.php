@@ -102,7 +102,22 @@ try {
     $body .= "Phone:   " . ($phone   !== '' ? $phone   : '—') . "\n";
     $body .= "Service: " . ($service !== '' ? $service : '—') . "\n\n";
     $body .= "Message:\n$message\n";
-    $mail->Body = $body;
+
+    // Send as HTML so Outlook replies open in HTML and keep the signature;
+    // the plain text stays as the fallback part.
+    $h = fn($v) => htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
+    $row = fn($label, $value) =>
+        '<tr><td style="padding:2px 12px 2px 0;color:#666">' . $label . '</td><td>' . $h($value) . '</td></tr>';
+    $mail->isHTML(true);
+    $mail->Body = '<p>You have a new enquiry from the ASAD Projects website:</p>'
+        . '<table style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">'
+        . $row('Name', $name)
+        . $row('Email', $email)
+        . $row('Phone', $phone !== '' ? $phone : '—')
+        . $row('Service', $service !== '' ? $service : '—')
+        . '</table>'
+        . '<p style="margin-top:14px"><strong>Message:</strong><br>' . nl2br($h($message)) . '</p>';
+    $mail->AltBody = $body;
 
     $mail->send();
     echo json_encode(['ok' => true]);
