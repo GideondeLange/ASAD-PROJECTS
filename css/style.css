@@ -543,3 +543,6 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
   .filter-bar.jump a { flex: 0 0 auto; white-space: nowrap; font-size: 0.62rem; letter-spacing: 0.18em; padding: 0.85rem 0; }
   .gallery-section { scroll-margin-top: 128px; padding-top: 2.2rem; }
 }
+
+/* Services photo grid for tall (portrait) photos: two-up 3:4 tiles, no wide first tile. */
+.svc-grid.tall .media, .svc-grid.tall .media:first-child { grid-column: auto; aspect-ratio: 3 / 4; }
