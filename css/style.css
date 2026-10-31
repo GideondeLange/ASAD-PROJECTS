@@ -528,3 +528,10 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
 /* A tile marked nocrop shows the whole photo at its own shape instead of the fixed frame. */
 .svc-grid .media.nocrop:first-child { aspect-ratio: auto; }
 .svc-grid .media.nocrop:first-child img { height: auto; display: block; }
+
+/* Home hero stays pinned while the sections below slide up over it. */
+.hero { position: sticky; top: 0; z-index: 0; }
+.hero ~ section { position: relative; z-index: 1; }
+.hero ~ section.section-light { background-color: var(--paper); }
+.hero ~ section.section-dark { background-color: var(--black); }
+.hero ~ section.cta-band { background-color: var(--black); }
