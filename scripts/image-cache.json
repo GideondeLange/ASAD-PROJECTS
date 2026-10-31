@@ -249,7 +249,7 @@
   "shared/2bedroom-floorplan-85m2.jpg": "8a7bde7d7d825597924a1802a223a8f18c53d8471ed2d6fc2f0851e203e1cd7a",
   "shared/3bedroom-exterior-catalog.jpg": "6a064e827b1041de996468acc55e67a8b2a4f52059aa824a19ce89b261f67fd1",
   "shared/3bedroom-floorplan-100m2.jpg": "db096a2e57e3a1cbb2d50bd55c29976d1d37069c0bb4e5e66b376b0b800148ac",
-  "pods/2-bedroom-v3.jpg": "0f3f065204865000e4a8284afeb281193a480c6ac8d9d85cb2f406aaa82f6296",
+  "pods/2-bedroom-v4.jpg": "234e88973ebc09efba300064e43ba78b0b92b8688402c502c5863113c03e606f",
   "pods/2-bedroom-g1.jpg": "0f9ede4256a6bd413380a38c5e107f80cb827054af55d7c80b76de88f0a73dc5",
   "pods/2-bedroom-g2.jpg": "ce68bfd1d4187b5b09d1a86966f96d9001c25cd29bb99caa44d210c00249ac81",
   "pods/2-bedroom-g3.jpg": "2d1bca3130cc6673dcee0ac906a98143f764d50e9c217705df724c6e909eb3fd",
@@ -263,5 +263,12 @@
   "pods/1-bedroom-living-unit-g6.jpg": "29c2f0d45c88a4b809f4a88e4492f522627b4c690fdcdc366253040ce95256d8",
   "pods/1-bedroom-living-unit-g7.jpg": "c6ccc9a6d06077a01507e74b4b99b6a1e144ce5667f578c0b33c546cf19f661d",
   "web/services-pods-real1.jpg": "772146866b39b282e76ad85ec21ecf3e788a14f8e1b21cdb2b4abc78145b8bcd",
-  "web/services-pods-real2.jpg": "388dbe5129a463e3e2e9b65d21144aa380af5633e854dc91697a69f46371029e"
+  "web/services-pods-real2.jpg": "388dbe5129a463e3e2e9b65d21144aa380af5633e854dc91697a69f46371029e",
+  "web/services-steel-real1.jpg": "7e50c828b5ed8f2ac800c037e8c857237aee0af00d1addda7ab6b2ab30fc4668",
+  "web/services-steel-real2.jpg": "cebb41764d81378c9ad73bcef7c84db499785f37f7a125234ee805fb0fa8d8c1",
+  "web/services-steel-real3.jpg": "d20c7ee449e41111e99ce323b0da96302dec896f49c0bde8059646a592a657cf",
+  "web/services-steel-real4.jpg": "5cda9c8ebe410b050a212145af658105254ac45f9e4f0c5dcc224d9302c68966",
+  "web/services-steel-real5.jpg": "ec40398e8cba6e9a45ba5fceb3a67a01e6fa83372ac800c88165c9efbc9c3ed2",
+  "web/services-steel-real6.jpg": "cdf7f145db28f6c8ff2a7305919da7a02ea68e1a14ce4d067c244a44502e8497",
+  "web/services-steel-real7.jpg": "b085b5718fd32aab86c099f1c3075f71d1fb6a74abbab14f236396ab5b27fa06"
 }
