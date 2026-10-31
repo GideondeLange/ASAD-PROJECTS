@@ -525,3 +525,6 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
 .pod-gallery.mixed .masonry-item:first-child { grid-column: auto; }
 .pod-gallery.mixed .masonry-item img { aspect-ratio: auto; height: auto; }
 @media (max-width: 560px) { .pod-gallery.mixed { columns: 1; } .pod-gallery.mixed .masonry-item { margin-bottom: 0.5rem; } }
+/* A tile marked nocrop shows the whole photo at its own shape instead of the fixed frame. */
+.svc-grid .media.nocrop:first-child { aspect-ratio: auto; }
+.svc-grid .media.nocrop:first-child img { height: auto; display: block; }
