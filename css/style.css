@@ -546,3 +546,7 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
 
 /* Services photo grid for tall (portrait) photos: two-up 3:4 tiles, no wide first tile. */
 .svc-grid.tall .media, .svc-grid.tall .media:first-child { grid-column: auto; aspect-ratio: 3 / 4; }
+
+/* Footer logo must never be wider than the screen (it was clipped on phones). */
+.footer-brand .brand img { max-width: 100%; width: auto; height: auto; max-height: 84px; }
+@media (max-width: 560px) { .footer-brand .brand img { width: 100%; max-height: none; } }
