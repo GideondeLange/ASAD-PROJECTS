@@ -84,8 +84,8 @@
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('pod') || params.get('service');
     if (slug && serviceField) {
-      const opt = document.querySelector(`#pod-options option[data-slug="${CSS.escape(slug)}"]`);
-      serviceField.value = opt ? opt.value : slug;
+      const opt = document.querySelector(`#service option[data-slug="${CSS.escape(slug)}"]`);
+      if (opt) serviceField.value = opt.value;
     }
 
     contactForm.addEventListener('submit', async (e) => {

@@ -38,11 +38,15 @@ $name    = trim($_POST['name']    ?? '');
 $email   = trim($_POST['email']   ?? '');
 $phone   = trim($_POST['phone']   ?? '');
 $service = trim($_POST['service'] ?? '');
+$location = trim($_POST['location'] ?? '');
 $message = trim($_POST['message'] ?? '');
 
 $errors = [];
 if ($name === '')                               $errors[] = 'name';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'email';
+if (!preg_match('/^[0-9+() \-]{7,}$/', $phone)) $errors[] = 'phone';
+if ($location === '')                           $errors[] = 'location';
+if ($service === '')                            $errors[] = 'service';
 if ($message === '')                            $errors[] = 'message';
 
 if ($errors) {
@@ -57,6 +61,7 @@ $name    = $oneLine($name);
 $email   = $oneLine($email);
 $phone   = $oneLine($phone);
 $service = $oneLine($service);
+$location = $oneLine($location);
 
 // ---- Credentials -----------------------------------------------------------
 $configFile = __DIR__ . '/mail-config.php';
@@ -99,8 +104,9 @@ try {
     $body  = "You have a new enquiry from the ASAD Projects website:\n\n";
     $body .= "Name:    $name\n";
     $body .= "Email:   $email\n";
-    $body .= "Phone:   " . ($phone   !== '' ? $phone   : '—') . "\n";
-    $body .= "Service: " . ($service !== '' ? $service : '—') . "\n\n";
+    $body .= "Phone:   $phone\n";
+    $body .= "Location: $location\n";
+    $body .= "Design/Service: $service\n\n";
     $body .= "Message:\n$message\n";
 
     // Send as HTML so Outlook replies open in HTML and keep the signature;
@@ -113,8 +119,9 @@ try {
         . '<table style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">'
         . $row('Name', $name)
         . $row('Email', $email)
-        . $row('Phone', $phone !== '' ? $phone : '—')
-        . $row('Service', $service !== '' ? $service : '—')
+        . $row('Phone', $phone)
+        . $row('Location', $location)
+        . $row('Design / service', $service)
         . '</table>'
         . '<p style="margin-top:14px"><strong>Message:</strong><br>' . nl2br($h($message)) . '</p>';
     $mail->AltBody = $body;

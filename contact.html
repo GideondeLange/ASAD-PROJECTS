@@ -78,29 +78,38 @@
           <form id="contact-form" action="contact.php" method="POST">
             <div class="field"><label for="name">Your name</label><input type="text" id="name" name="name" autocomplete="name" required></div>
             <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" autocomplete="email" required></div>
-            <div class="field"><label for="phone">Phone number (optional)</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
-            <div class="field"><label for="service">Pod or service of interest</label><input type="text" id="service" name="service" list="pod-options" placeholder="e.g. 2 Bedroom Pod, Decking"></div>
-            <datalist id="pod-options">
-              <option value="2 Bedroom Pod" data-slug="2-bedroom"></option>
-              <option value="2 Bedroom Living Unit" data-slug="2-bedroom-living-unit"></option>
-              <option value="3 Bedroom Pod" data-slug="3-bedroom"></option>
-              <option value="1 Bedroom Living Unit" data-slug="1-bedroom-living-unit"></option>
-              <option value="Elevated Steel Off-Grid Pod" data-slug="pod-1"></option>
-              <option value="Garden Cottage Living Unit" data-slug="pod-2"></option>
-              <option value="Off-Grid Cabin Pod" data-slug="pod-4"></option>
-              <option value="A-Frame Cabin Pod" data-slug="pod-5"></option>
-              <option value="Airbnb Guest Suite Pod" data-slug="pod-6"></option>
-              <option value="Backyard Entertainment Pod" data-slug="entertainment-pod"></option>
-              <option value="Backyard Office / Storage Pod" data-slug="office-storage-pod"></option>
-              <option value="Guard House" data-slug="guard-house"></option>
-              <option value="Coffee Shop Pod" data-slug="coffee-shop-pod"></option>
-              <option value="Roof Top Pod" data-slug="roof-top-pod"></option>
-              <option value="Accommodation Pods" data-slug="accommodation-pods"></option>
-              <option value="Bespoke Steelwork" data-slug="bespoke-steelwork"></option>
-              <option value="Custom Glazed Steelwork" data-slug="custom-glazed-steelwork"></option>
-              <option value="Carpentry &amp; Kitchens" data-slug="carpentry-kitchens"></option>
-              <option value="Pergolas &amp; Decking" data-slug="pergolas-decking"></option>
-            </datalist>
+            <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" minlength="7" placeholder="e.g. 083 123 4567" required></div>
+            <div class="field"><label for="location">Where are you based? (town / area)</label><input type="text" id="location" name="location" autocomplete="address-level2" placeholder="e.g. Boksburg, Gauteng" required></div>
+            <div class="field"><label for="service">Pod design or service</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a design or service</option>
+                <option value="Custom design" data-slug="custom-design">Custom design (bespoke to your plans)</option>
+                <optgroup label="Pod designs">
+                <option value="2 Bedroom Pod" data-slug="2-bedroom">2 Bedroom Pod</option>
+                <option value="2 Bedroom Living Unit" data-slug="2-bedroom-living-unit">2 Bedroom Living Unit</option>
+                <option value="3 Bedroom Pod" data-slug="3-bedroom">3 Bedroom Pod</option>
+                <option value="1 Bedroom Living Unit" data-slug="1-bedroom-living-unit">1 Bedroom Living Unit</option>
+                <option value="Elevated Steel Off-Grid Pod" data-slug="pod-1">Elevated Steel Off-Grid Pod</option>
+                <option value="Garden Cottage Living Unit" data-slug="pod-2">Garden Cottage Living Unit</option>
+                <option value="Off-Grid Cabin Pod" data-slug="pod-4">Off-Grid Cabin Pod</option>
+                <option value="A-Frame Cabin Pod" data-slug="pod-5">A-Frame Cabin Pod</option>
+                <option value="Airbnb Guest Suite Pod" data-slug="pod-6">Airbnb Guest Suite Pod</option>
+                <option value="Backyard Entertainment Pod" data-slug="entertainment-pod">Backyard Entertainment Pod</option>
+                <option value="Backyard Office / Storage Pod" data-slug="office-storage-pod">Backyard Office / Storage Pod</option>
+                <option value="Guard House" data-slug="guard-house">Guard House</option>
+                <option value="Coffee Shop Pod" data-slug="coffee-shop-pod">Coffee Shop Pod</option>
+                <option value="Roof Top Pod" data-slug="roof-top-pod">Roof Top Pod</option>
+                </optgroup>
+                <optgroup label="Services">
+                <option value="Accommodation Pods" data-slug="accommodation-pods">Accommodation Pods</option>
+                <option value="Bespoke Steelwork" data-slug="bespoke-steelwork">Bespoke Steelwork</option>
+                <option value="Custom Glazed Steelwork" data-slug="custom-glazed-steelwork">Custom Glazed Steelwork</option>
+                <option value="Carpentry &amp; Kitchens" data-slug="carpentry-kitchens">Carpentry &amp; Kitchens</option>
+                <option value="Pergolas &amp; Decking" data-slug="pergolas-decking">Pergolas &amp; Decking</option>
+                </optgroup>
+              </select>
+            </div>
+            <p class="form-coverage">We work nationwide. Delivery and installation are included within 100 km of our Boksburg branch; outside that range, transport is excluded and quoted separately.</p>
             <div class="field"><label for="message">Your message</label><textarea id="message" name="message" required></textarea></div>
             <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
             <button type="submit" class="btn btn-solid">Send message</button>
