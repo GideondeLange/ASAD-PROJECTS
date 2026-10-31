@@ -511,3 +511,11 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* Pod page photo gallery: first photo full width, the rest two across. Shown in colour (renders are the selling point). */
+.pod-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pod-gallery .masonry-item { margin: 0; }
+.pod-gallery .masonry-item:first-child { grid-column: 1 / -1; }
+.pod-gallery .masonry-item img { aspect-ratio: 16 / 9; object-fit: cover; filter: none; }
+.pod-gallery .masonry-item:hover img { filter: none; }
+@media (max-width: 560px) { .pod-gallery { grid-template-columns: 1fr; gap: 0.5rem; } }
