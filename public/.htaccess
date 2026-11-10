@@ -3,6 +3,10 @@
 # the deploy changes — Apache just rewrites what the browser sees.
 
 Options -MultiViews
+# Always declare UTF-8 in the HTTP header so browsers never guess an old encoding
+# (that garbled the non-breaking space in prices, m2, dashes and apostrophes).
+AddDefaultCharset UTF-8
+
 RewriteEngine On
 
 # 0. Canonical domain: force https and non-www. Google was indexing three

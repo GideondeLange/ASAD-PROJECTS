@@ -21,6 +21,7 @@ export function head({ title, desc, path, image = '/images/chosen/asad-pod5.jpg'
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEDC4PJXDX"></script>
   <script>
@@ -44,7 +45,6 @@ export function head({ title, desc, path, image = '/images/chosen/asad-pod5.jpg'
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2151076789102844&ev=PageView&noscript=1" alt=""></noscript>
   <!-- End Meta Pixel Code -->
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
