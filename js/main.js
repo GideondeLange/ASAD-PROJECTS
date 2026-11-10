@@ -108,6 +108,7 @@
             successEl.hidden = false;
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
+          if (typeof fbq === 'function') fbq('track', 'Lead');
           if (typeof gtag === 'function') {
             // contact_form_submit matches the Key Event configured in GA4;
             // generate_lead is GA4's own recommended event name.
@@ -131,20 +132,20 @@
     });
   }
 
-  /* --- GA4 conversion tracking: WhatsApp and Enquire clicks --- */
-  if (typeof gtag === 'function') {
-    document.addEventListener('click', (e) => {
-      const waLink = e.target.closest('[data-wa]');
-      if (waLink) {
-        gtag('event', 'contact_whatsapp', { link_url: waLink.href });
-        return;
-      }
-      const enquireLink = e.target.closest('[data-enquire]');
-      if (enquireLink) {
-        gtag('event', 'enquire_click', { pod_name: enquireLink.dataset.enquire });
-      }
-    });
-  }
+  /* --- Conversion tracking (GA4 + Meta Pixel): WhatsApp and Enquire clicks --- */
+  document.addEventListener('click', (e) => {
+    const waLink = e.target.closest('[data-wa]');
+    if (waLink) {
+      if (typeof gtag === 'function') gtag('event', 'contact_whatsapp', { link_url: waLink.href });
+      if (typeof fbq === 'function') fbq('track', 'Contact');
+      return;
+    }
+    const enquireLink = e.target.closest('[data-enquire]');
+    if (enquireLink) {
+      if (typeof gtag === 'function') gtag('event', 'enquire_click', { pod_name: enquireLink.dataset.enquire });
+      if (typeof fbq === 'function') fbq('trackCustom', 'EnquireClick', { pod_name: enquireLink.dataset.enquire });
+    }
+  });
 
   /* ----------------------------------------------------------------
      LIGHTBOX — gallery page (.masonry-item) and finishes page (.lb-trigger).
