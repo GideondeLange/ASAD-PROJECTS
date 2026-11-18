@@ -23,6 +23,11 @@ RewriteRule ^(.*)$ https://asad.co.za/$1 [R=301,L]
 #      live equivalent instead of leaving them 404, so any residual
 #      ranking value carries over instead of leaking to a dead end.
 RewriteRule ^contact-luxury-renovations/?$ /contact [R=301,L]
+RewriteRule ^projects-asad-projects-blog-renovations-custom-glazed-steelwork-construction/?$ /gallery [R=301,L]
+RewriteRule ^gallery-bespoke-steelwork/?$ /gallery [R=301,L]
+RewriteRule ^transform-your-space-your-ultimate-guide-to-living-room-renovation/?$ /blog [R=301,L]
+RewriteRule ^bidwell-pod-living-solutions-building-contractors/?$ /asad-pods [R=301,L]
+RewriteRule ^bespoke-steelwork-custom-glazed-steelwork-contruction-and-renovation-pergolas-and-decking/?$ /services [R=301,L]
 
 # 0.6. Bidwell -> ASAD rebrand: /bidwell was live and indexed under that
 #      name; redirect it and its sub-pages to the new /asad-pods URLs so
