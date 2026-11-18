@@ -22,6 +22,7 @@ export default defineConfig({
         asadPods:  resolve(__dirname, 'asad-pods.html'),
         services:  resolve(__dirname, 'services.html'),
         finishes:  resolve(__dirname, 'finishes.html'),
+        privacy:   resolve(__dirname, 'privacy.html'),
         gallery:   resolve(__dirname, 'gallery.html'),
         contact:   resolve(__dirname, 'contact.html'),
         blog:      resolve(__dirname, 'blog/index.html'),

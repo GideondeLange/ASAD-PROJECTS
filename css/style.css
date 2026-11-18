@@ -592,3 +592,11 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
 .price-guide td:last-child { color: #4a4a4a; }
 .price-guide a { border-bottom: 1px solid currentColor; }
 .blog-article .compare-wrap { margin: 1.4rem 0 1rem; }
+
+/* Privacy / plain text pages */
+.prose h2{font-size:1.5rem;margin:2.2rem 0 .6rem}
+.prose h2:first-child{margin-top:0}
+.prose p,.prose li{line-height:1.7}
+.prose ul{padding-left:1.2rem;margin:.6rem 0}
+.prose li{margin:.35rem 0}
+.prose a{border-bottom:1px solid currentColor}
