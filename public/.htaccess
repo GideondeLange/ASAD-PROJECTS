@@ -7,6 +7,9 @@ Options -MultiViews
 # (that garbled the non-breaking space in prices, m2, dashes and apostrophes).
 AddDefaultCharset UTF-8
 
+# Branded page for any address that does not exist (served with a real 404 status).
+ErrorDocument 404 /404.html
+
 RewriteEngine On
 
 # 0. Canonical domain: force https and non-www. Google was indexing three

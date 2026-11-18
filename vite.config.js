@@ -23,6 +23,7 @@ export default defineConfig({
         services:  resolve(__dirname, 'services.html'),
         finishes:  resolve(__dirname, 'finishes.html'),
         privacy:   resolve(__dirname, 'privacy.html'),
+        notfound:  resolve(__dirname, '404.html'),
         gallery:   resolve(__dirname, 'gallery.html'),
         contact:   resolve(__dirname, 'contact.html'),
         blog:      resolve(__dirname, 'blog/index.html'),
