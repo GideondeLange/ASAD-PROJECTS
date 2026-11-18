@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "pages": "node scripts/site/make-web-images.mjs && node scripts/site/build.mjs",
+    "pages": "node -e \"console.error('npm run pages is disabled: the HTML pages are now edited directly. See scripts/site/README.md'); process.exit(1)\"",
+    "pages:legacy": "node scripts/site/make-web-images.mjs && node scripts/site/build.mjs",
     "build": "node scripts/autorotate.js && node scripts/imgdims.js && vite build",
     "preview": "vite preview"
   },
