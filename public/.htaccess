@@ -49,6 +49,7 @@ RewriteRule ^asad-pods/pod-3/?$ /asad-pods [R=301,L]
 # 0.66. The 75 m2 2 Bedroom Living Unit was retired: send its page and its old
 #       brochure link to the closest live pages.
 RewriteRule ^asad-pods/2-bedroom-living-unit/?$ /asad-pods/2-bedroom [R=301,L]
+RewriteRule ^asad-pods/3-bedroom/?$ /asad-pods/3-bedroom-pitched-house [R=301,L]
 RewriteRule ^brochures/asad-2-bedroom-living-unit-75sqm-brochure.pdf$ /brochures [R=301,L]
 
 # 0.7. /asad-pods also exists as a directory on disk (asad-pods/pod-1.html

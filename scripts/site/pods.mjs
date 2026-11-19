@@ -29,12 +29,6 @@ export const PODS = [
     alt: '2 Bedroom Pod exterior at golden hour',
   },
   {
-    slug: '3-bedroom', name: '3 Bedroom Pod', category: 'homes', label: 'Family Homes',
-    size: 100, price: 1095000, tags: FULL, spec: SPEC,
-    summary: 'Our largest family home: three bedrooms and room to grow.',
-    alt: '3 Bedroom Pod exterior render',
-  },
-  {
     slug: '1-bedroom-living-unit', name: '1 Bedroom Living Unit', category: 'homes', label: 'Featured Unit',
     size: 40, price: 512000, tags: FULL, spec: SPEC,
     facts: ['40 m² building + 9.5 m² decking'],
