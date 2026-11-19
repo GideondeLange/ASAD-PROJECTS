@@ -2,12 +2,14 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { PODS } from './scripts/site/pods.mjs'
+import brochuresPlugin from './scripts/brochures-plugin.mjs'
 
 export default defineConfig({
   publicDir: 'public',
   // lets the dev server be shared through a temporary Cloudflare quick-tunnel link
   server: { allowedHosts: ['.trycloudflare.com'] },
   plugins: [
+    brochuresPlugin(),
     ViteImageOptimizer({
       includePublic: true,
       jpg:  { quality: 82 },
@@ -24,6 +26,7 @@ export default defineConfig({
         finishes:  resolve(__dirname, 'finishes.html'),
         privacy:   resolve(__dirname, 'privacy.html'),
         notfound:  resolve(__dirname, '404.html'),
+        brochures: resolve(__dirname, 'brochures.html'),
         gallery:   resolve(__dirname, 'gallery.html'),
         contact:   resolve(__dirname, 'contact.html'),
         blog:      resolve(__dirname, 'blog/index.html'),

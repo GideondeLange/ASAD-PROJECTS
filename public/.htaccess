@@ -53,6 +53,18 @@ RewriteRule ^asad-pods/pod-3/?$ /asad-pods [R=301,L]
 #      asad-pods.html. Serve it explicitly before that generic rule runs.
 RewriteRule ^asad-pods/?$ /asad-pods.html [L]
 
+# 0.75. Same situation for /brochures: the PDFs live in a /brochures folder, so
+#       serve the page explicitly. Browsers and Hostinger must always fetch the
+#       latest PDF after one is overwritten under the same name, and the PDFs
+#       open in the browser (not forced download).
+RewriteRule ^brochures/?$ /brochures.html [L]
+<IfModule mod_headers.c>
+  <FilesMatch "\.pdf$">
+    Header set Cache-Control "no-cache, must-revalidate"
+    Header set Content-Disposition "inline"
+  </FilesMatch>
+</IfModule>
+
 # 1. External redirect: if a visitor or old bookmark hits *.html directly,
 #    send them to the clean URL with a permanent (301) redirect so search
 #    engines transfer ranking signals to the new URL instead of treating
