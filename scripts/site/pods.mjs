@@ -29,13 +29,6 @@ export const PODS = [
     alt: '2 Bedroom Pod exterior at golden hour',
   },
   {
-    slug: '2-bedroom-living-unit', name: '2 Bedroom Living Unit', category: 'homes', label: 'Family Homes · Option 2',
-    size: 75, price: 750000, tags: FULL, spec: SPEC,
-    facts: ['75 m² building + 31.2 m² decking', '2 queen bedrooms · 1 bathroom · open plan'],
-    summary: 'Two queen bedrooms, one bathroom and an open-plan living space with a generous deck.',
-    alt: '2 Bedroom Living Unit render',
-  },
-  {
     slug: '3-bedroom', name: '3 Bedroom Pod', category: 'homes', label: 'Family Homes',
     size: 100, price: 1095000, tags: FULL, spec: SPEC,
     summary: 'Our largest family home: three bedrooms and room to grow.',
