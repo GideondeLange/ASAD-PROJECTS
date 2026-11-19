@@ -605,7 +605,7 @@ main > section:not([class]) { padding: clamp(4rem, 8vw, 7rem) 0; background: var
 .brochure-grid{display:grid;grid-template-columns:1fr;gap:1.75rem}
 .brochure-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line-light)}
 .brochure-img{aspect-ratio:16/10;overflow:hidden;background:var(--charcoal)}
-.brochure-img img{width:100%;height:100%;object-fit:cover;display:block}
+.brochure-img img{width:100%;height:100%;object-fit:contain;display:block}
 .brochure-body{display:flex;flex-direction:column;gap:.9rem;padding:1.4rem 1.25rem 1.5rem;flex:1}
 .brochure-body h2{font-size:clamp(1.4rem,5vw,1.8rem);line-height:1.15}
 .brochure-body p{line-height:1.65;color:#3d3d3d}
