@@ -8,8 +8,6 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 export function brochureCards() {
   return BROCHURES.map((b) => {
     const url = `${SITE}/brochures/${b.file}`
-    const msg = `Hi, here is our ${b.title}:\n${url}`
-    const wa = `https://wa.me/?text=${encodeURIComponent(msg)}`
     const related = b.page ? `\n            <a class="brochure-related" href="${esc(b.page)}">${esc(b.pageLabel || 'Related page')} &rarr;</a>` : ''
     return `          <article class="brochure-card">
             <div class="brochure-img"><img width="${b.w}" height="${b.h}" src="${esc(b.image)}" alt="${esc(b.alt)}" loading="lazy"></div>
@@ -18,7 +16,6 @@ export function brochureCards() {
               <p>${esc(b.desc)}</p>${related}
               <div class="brochure-actions">
                 <a class="btn btn-solid" href="/brochures/${esc(b.file)}" target="_blank" rel="noopener" aria-label="View ${esc(b.title)} as a PDF">View PDF</a>
-                <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener" aria-label="Send ${esc(b.title)} on WhatsApp">Send on WhatsApp</a>
               </div>
             </div>
           </article>`
