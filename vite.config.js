@@ -27,6 +27,8 @@ export default defineConfig({
         privacy:   resolve(__dirname, 'privacy.html'),
         notfound:  resolve(__dirname, '404.html'),
         brochures: resolve(__dirname, 'brochures.html'),
+        tinyhomes: resolve(__dirname, 'tiny-homes.html'),
+        modularhomes: resolve(__dirname, 'modular-homes.html'),
         gallery:   resolve(__dirname, 'gallery.html'),
         contact:   resolve(__dirname, 'contact.html'),
         blog:      resolve(__dirname, 'blog/index.html'),
