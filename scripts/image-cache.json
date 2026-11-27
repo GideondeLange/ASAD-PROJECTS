@@ -304,5 +304,11 @@
   "web/services-deck3.jpg": "9b38b6384597eadc9f594b4e25c168ccac30266967a8aad67fd1f300bce37cc2",
   "web/services-deck4.jpg": "f948275fdce1a80001497051d3ca8f8c4edfbb2ecfaadd56131dc1cb289748f6",
   "web/services-deck5.jpg": "6b34d618194a8eb4558072e0bea36d2b71db3d2f8d8a7575bb1d596b75fbed4b",
-  "web/services-deck6.jpg": "10831ba6d69228c9642ff88100b13e12b66ea9b9297f34adc282f5d37207d004"
+  "web/services-deck6.jpg": "10831ba6d69228c9642ff88100b13e12b66ea9b9297f34adc282f5d37207d004",
+  "pods/double-story-modular-unit.jpg": "ae625c3497fd489aba519929310a7d4403f0651e18a2be90118d96b691bf8773",
+  "pods/double-story-modular-unit-g1.jpg": "e7e22db55931a17697b68a3b80dc7b49953891cc1e05301bf2359e1eaa1618d0",
+  "pods/double-story-modular-unit-g2.jpg": "acc7a9b2683ce03c268fcfd9bcf4e0aa3dcb39469b3007b83fc1f35cc28df050",
+  "pods/double-story-modular-unit-g3.jpg": "675546c8a9da4eb71f9055296e8416e8018322795eb426cdc31806a503e5a0bb",
+  "pods/double-story-modular-unit-g4.jpg": "5d7664ad7e8cd9ec70f3e0db61f862a46f28b41aaedfe6401bbb65d44f8428ab",
+  "pods/double-story-modular-unit-g5.jpg": "f61901ee3b54e102530dd2853ef98a21e620e03845357d8eac882349f9a7b05d"
 }
