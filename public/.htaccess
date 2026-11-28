@@ -22,6 +22,14 @@ RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*)$ https://asad.co.za/$1 [R=301,L]
 
+# 0.3. PERMANENT QR CODE ADDRESS - DO NOT DELETE OR RENAME.
+#       https://asad.co.za/qr is printed as a QR code on stickers, vehicles and
+#       signs. Those cannot be reprinted, so this address must work forever.
+#       It is a temporary (302) redirect on purpose: browsers never cache it,
+#       so the destination below can be changed at any time without reprinting.
+#       The utm tags let Google Analytics show how many visits came from QR scans.
+RewriteRule ^qr/?$ /?utm_source=qr&utm_medium=sticker&utm_campaign=qr_sticker [NC,R=302,L]
+
 # 0.5. Known dead pages still indexed by Google - redirect to the closest
 #      live equivalent instead of leaving them 404, so any residual
 #      ranking value carries over instead of leaking to a dead end.
